@@ -1,0 +1,2 @@
+"""PKOS collector application package."""
+
