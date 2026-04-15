@@ -60,11 +60,19 @@ class LocalAssetStore:
         content = json.dumps(payload, ensure_ascii=False, sort_keys=True, indent=2).encode("utf-8")
         return self.store_bytes(category=category, suggested_name=suggested_name, content=content)
 
-    def decode_asset_content(self, *, content_base64: str | None, text_content: str | None) -> bytes:
+    def read_bytes(self, *, relative_path: str) -> bytes:
+        """Read a previously stored asset."""
+        return (self.root_dir / relative_path).read_bytes()
+
+    def decode_asset_content(
+        self,
+        *,
+        content_base64: str | None,
+        text_content: str | None,
+    ) -> bytes:
         """Convert inline request content into bytes."""
         if content_base64 is not None:
             return base64.b64decode(content_base64)
         if text_content is not None:
             return text_content.encode("utf-8")
         raise ValueError("asset payload requires either content_base64 or text_content")
-

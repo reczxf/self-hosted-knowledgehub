@@ -1,4 +1,4 @@
-.PHONY: setup run test lint format help ensure-venv
+.PHONY: setup run test lint format help ensure-venv frontend-install frontend-build
 
 PYTHON_VERSION := 3.13
 VENV_PYTHON := .venv/bin/python
@@ -10,6 +10,8 @@ help:
 	@echo "  make run    - start the FastAPI app with reload"
 	@echo "  make test   - run pytest"
 	@echo "  make lint   - run ruff check"
+	@echo "  make frontend-install - install frontend dependencies"
+	@echo "  make frontend-build   - build the frontend SPA"
 	@echo "  make ensure-venv - verify the local virtual environment exists"
 
 setup:
@@ -31,3 +33,9 @@ test: ensure-venv
 
 lint: ensure-venv
 	$(VENV_PYTHON) -m ruff check .
+
+frontend-install:
+	cd frontend && npm install
+
+frontend-build:
+	cd frontend && npm run build

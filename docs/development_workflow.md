@@ -27,6 +27,8 @@
 - `make run`
 - `make test`
 - `make lint`
+- `make frontend-install`
+- `make frontend-build`
 
 它的优势是：
 
@@ -88,11 +90,24 @@ make test
 make lint
 ```
 
+安装前端依赖：
+
+```bash
+make frontend-install
+```
+
+构建前端：
+
+```bash
+make frontend-build
+```
+
 说明：
 
 - `Makefile` 已直接使用项目虚拟环境中的 `.venv/bin/python`
 - 因此执行 `make run`、`make test`、`make lint` 前，不需要手工执行 `source .venv/bin/activate`
 - `run.sh` 仍然保留显式激活，主要是为了兼容“脚本启动”的使用习惯
+- 前端工作台现已升级为独立 `Vue + Vite` 工程，因此访问 `/ui` 前应先完成前端构建
 
 ## VS Code 调试
 

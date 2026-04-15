@@ -62,3 +62,13 @@ Do not commit secrets, local environment files, or generated artifacts. The exis
 
 - 新增开发环境文档：[development_setup.md](/home/choho/gitee/self-hosted-knowledgehub/docs/development_setup.md)
 - 新增本地开发入口说明：[development_workflow.md](/home/choho/gitee/self-hosted-knowledgehub/docs/development_workflow.md)
+- 新增系统功能清单：[system_feature_inventory.md](/home/choho/gitee/self-hosted-knowledgehub/docs/system_feature_inventory.md)
+- 新增 Source Layer API 文档：[source_layer_api.md](/home/choho/gitee/self-hosted-knowledgehub/docs/source_layer_api.md)
+- 新增 Memory Layer API 文档：[memory_layer_api.md](/home/choho/gitee/self-hosted-knowledgehub/docs/memory_layer_api.md)
+- 更新开发环境文档，补充启动期 schema 兼容性说明：[development_setup.md](/home/choho/gitee/self-hosted-knowledgehub/docs/development_setup.md)
+- 新增 Knowledge Layer API 文档：[knowledge_layer_api.md](/home/choho/gitee/self-hosted-knowledgehub/docs/knowledge_layer_api.md)
+- 新增内置前端控制台说明：[web_ui.md](/home/choho/gitee/self-hosted-knowledgehub/docs/web_ui.md)
+- 新增文件上传接口说明：[upload_api.md](/home/choho/gitee/self-hosted-knowledgehub/docs/upload_api.md)
+- 新增对话层接口说明：[conversation_layer_api.md](/home/choho/gitee/self-hosted-knowledgehub/docs/conversation_layer_api.md)
+- 更新对话层接口说明，补充多轮会话与 `session_id` 约定：[conversation_layer_api.md](/home/choho/gitee/self-hosted-knowledgehub/docs/conversation_layer_api.md)
+- 更新内置前端说明，升级为完整 Vue/Vite 前端工程：[web_ui.md](/home/choho/gitee/self-hosted-knowledgehub/docs/web_ui.md)

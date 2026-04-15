@@ -19,13 +19,29 @@ cp .env.example .env
 make run
 ```
 
-4. Open `http://127.0.0.1:8000/docs`.
+4. Install and build the frontend:
+
+```bash
+make frontend-install
+make frontend-build
+```
+
+5. Open `http://127.0.0.1:8000/docs`.
+6. Open `http://127.0.0.1:8000/ui` for the built-in dashboard.
+
+To enable DeepSeek-backed conversation answers, configure:
+
+```env
+PKOS_DEEPSEEK_API_KEY=your_deepseek_api_key
+PKOS_DEEPSEEK_MODEL=deepseek-chat
+```
 
 ## Common commands
 
 ```bash
 make test
 make lint
+make frontend-build
 ```
 
 You can also use `./run.sh` as a thin wrapper around `make run`.

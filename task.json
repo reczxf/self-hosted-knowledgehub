@@ -1,0 +1,341 @@
+{
+  "generated_at": "2026-04-15T17:33:39+08:00",
+  "source_task_file": ".config/tasks/tasks_20260415173339.md",
+  "project": "self-hosted-knowledgehub",
+  "current_stage": "conversation_mvp",
+  "status_summary": {
+    "implemented": 18,
+    "partial": 2,
+    "not_implemented": 3
+  },
+  "tasks": [
+    {
+      "id": "document-upload-ingest",
+      "title": "文件上传导入",
+      "domain": "collector_api",
+      "status": "implemented",
+      "priority": "done",
+      "description": "已支持 multipart 文件上传接口和前端文件导入入口，上传文件会作为 document 类型 source 落库。",
+      "evidence": [
+        "app/main.py:104",
+        "app/repositories.py:246",
+        "frontend/app.js:1"
+      ],
+      "next_action": "后续可补批量上传和上传进度。"
+    },
+    {
+      "id": "web-ui-dashboard",
+      "title": "内置前端管理台",
+      "domain": "frontend",
+      "status": "implemented",
+      "priority": "done",
+      "description": "已提供独立 frontend 目录下的完整 Vue/Vite 前端工程，具备 chat-first 主界面、路由、状态管理和构建产物接入。",
+      "evidence": [
+        "frontend/package.json:1",
+        "frontend/src/App.vue:1",
+        "frontend/src/views/ChatPage.vue:1",
+        "app/main.py:59"
+      ],
+      "next_action": "后续可继续补会话列表、流式响应和更细粒度交互状态。"
+    },
+    {
+      "id": "collector-health-endpoint",
+      "title": "健康检查接口",
+      "domain": "collector_api",
+      "status": "implemented",
+      "priority": "done",
+      "description": "提供基础服务存活探测接口 GET /healthz。",
+      "evidence": [
+        "app/main.py:64"
+      ],
+      "next_action": "后续可补 readiness 检查。"
+    },
+    {
+      "id": "collector-ingest-webpage",
+      "title": "网页采集接口",
+      "domain": "collector_api",
+      "status": "implemented",
+      "priority": "done",
+      "description": "提供 POST /ingest/webpage，支持网页类采集请求入站。",
+      "evidence": [
+        "app/main.py:69"
+      ],
+      "next_action": "作为其它 ingest 接口的参考实现。"
+    },
+    {
+      "id": "collector-local-asset-storage",
+      "title": "本地资产落盘",
+      "domain": "storage",
+      "status": "implemented",
+      "priority": "done",
+      "description": "支持 JSON、文本和二进制资产落盘，并按 sha256 分片存储。",
+      "evidence": [
+        "app/storage.py:22"
+      ],
+      "next_action": "后续可补对象存储抽象。"
+    },
+    {
+      "id": "collector-persistence-model",
+      "title": "采集核心数据持久化",
+      "domain": "persistence",
+      "status": "implemented",
+      "priority": "done",
+      "description": "采集时会写入 source_items、source_versions、binary_assets、events。",
+      "evidence": [
+        "app/repositories.py:282"
+      ],
+      "next_action": "后续继续扩展来源类型。"
+    },
+    {
+      "id": "collector-bootstrap-init",
+      "title": "启动期初始化",
+      "domain": "runtime",
+      "status": "implemented",
+      "priority": "done",
+      "description": "服务启动时创建目录、建表、启用 vector 扩展，并执行轻量 schema 兼容修复。",
+      "evidence": [
+        "app/main.py:54"
+      ],
+      "next_action": "后续考虑迁移到正式 migration 流程。"
+    },
+    {
+      "id": "collector-versioning",
+      "title": "版本化采集与幂等",
+      "domain": "persistence",
+      "status": "implemented",
+      "priority": "done",
+      "description": "已支持同一 canonical_uri 下的版本化采集，并基于 content_sha256 做内容级去重。",
+      "evidence": [
+        "app/repositories.py:320",
+        "app/repositories.py:529"
+      ],
+      "next_action": "后续可细化重复内容事件语义。"
+    },
+    {
+      "id": "collector-metadata-coverage",
+      "title": "采集元信息覆盖",
+      "domain": "schema",
+      "status": "implemented",
+      "priority": "done",
+      "description": "已将 device_context 提升为显式 schema 与持久化字段。",
+      "evidence": [
+        "app/schemas.py:58",
+        "app/models.py:99"
+      ],
+      "next_action": "后续再补更多来源特有字段。"
+    },
+    {
+      "id": "collector-test-coverage",
+      "title": "测试覆盖",
+      "domain": "quality",
+      "status": "implemented",
+      "priority": "done",
+      "description": "已覆盖 API、索引工具、repository 逻辑，以及基于真实 PostgreSQL 的事务级链路与 HTTP 级回归路径。",
+      "evidence": [
+        "tests/test_api.py:1",
+        "tests/test_indexing.py:1",
+        "tests/test_repositories.py:1",
+        "tests/test_integration_postgres.py:1"
+      ],
+      "next_action": "后续可继续补更多异常路径与性能回归场景。"
+    },
+    {
+      "id": "ingest-bookmark-endpoint",
+      "title": "书签采集接口",
+      "domain": "collector_api",
+      "status": "implemented",
+      "priority": "done",
+      "description": "已支持 POST /ingest/bookmark，并复用统一采集持久化流程。",
+      "evidence": [
+        "app/main.py:79",
+        "app/repositories.py:106"
+      ],
+      "next_action": "后续补更多书签元字段。"
+    },
+    {
+      "id": "ingest-search-endpoint",
+      "title": "搜索行为采集接口",
+      "domain": "collector_api",
+      "status": "implemented",
+      "priority": "done",
+      "description": "已支持 POST /ingest/search，可记录 query 与 search_engine 元信息。",
+      "evidence": [
+        "app/main.py:88",
+        "app/repositories.py:146"
+      ],
+      "next_action": "后续可细化搜索结果级建模。"
+    },
+    {
+      "id": "ingest-chat-endpoint",
+      "title": "对话采集接口",
+      "domain": "collector_api",
+      "status": "implemented",
+      "priority": "done",
+      "description": "已支持 POST /ingest/chat，可将 messages 自动落盘为 chat_messages 资产。",
+      "evidence": [
+        "app/main.py:97",
+        "app/repositories.py:195"
+      ],
+      "next_action": "后续可引入 message 级索引。"
+    },
+    {
+      "id": "read-model-apis",
+      "title": "读取类 API",
+      "domain": "query_api",
+      "status": "implemented",
+      "priority": "done",
+      "description": "已支持 source、version、event 的基础列表与详情查询接口。",
+      "evidence": [
+        "app/main.py:106",
+        "app/repositories.py:565"
+      ],
+      "next_action": "后续补资产查询和过滤。"
+    },
+    {
+      "id": "full-text-indexing",
+      "title": "全文索引",
+      "domain": "memory_layer",
+      "status": "implemented",
+      "priority": "done",
+      "description": "已支持从落盘资产抽取文本，写入 derived_documents，并通过 PostgreSQL 全文检索查询。",
+      "evidence": [
+        "app/indexing.py:17",
+        "app/models.py:189",
+        "app/repositories.py:890",
+        "app/main.py:217"
+      ],
+      "depends_on": [
+        "read-model-apis",
+        "background-jobs"
+      ],
+      "next_action": "后续补分块和混合召回。"
+    },
+    {
+      "id": "vector-indexing",
+      "title": "向量索引与 Embedding",
+      "domain": "memory_layer",
+      "status": "implemented",
+      "priority": "done",
+      "description": "已支持生成轻量 embedding、向量列存储与基础语义检索。",
+      "evidence": [
+        "app/vector.py:1",
+        "app/indexing.py:33",
+        "app/repositories.py:915",
+        "app/main.py:228"
+      ],
+      "depends_on": [
+        "background-jobs"
+      ],
+      "next_action": "后续替换为真实 embedding 模型与更高效召回。"
+    },
+    {
+      "id": "knowledge-compilation",
+      "title": "知识编译层",
+      "domain": "knowledge_layer",
+      "status": "partial",
+      "priority": "p2",
+      "description": "已支持基于 derived_documents 编译 insight_card，但尚未实现主题页、项目页、实体页等更高阶知识对象。",
+      "evidence": [
+        "app/models.py:267",
+        "app/repositories.py:892",
+        "app/main.py:242"
+      ],
+      "depends_on": [
+        "full-text-indexing",
+        "vector-indexing"
+      ],
+      "next_action": "继续扩展主题页、项目页和知识对象之间的链接关系。"
+    },
+    {
+      "id": "conversation-layer",
+      "title": "对话调用层",
+      "domain": "conversation_layer",
+      "status": "partial",
+      "priority": "p2",
+      "description": "已支持基于 DeepSeek 的最小多轮会话接口，可自动创建或续接 session，持久化问答轮次，并在未配置 API Key 时降级到本地模板回答。",
+      "evidence": [
+        "app/models.py:191",
+        "app/main.py:335",
+        "app/repositories.py:839",
+        "frontend/app.js:237",
+        "tests/test_integration_postgres.py:193"
+      ],
+      "depends_on": [
+        "knowledge-compilation",
+        "vector-indexing",
+        "read-model-apis"
+      ],
+      "next_action": "继续扩展回答回写、会话列表查询，以及更长上下文的摘要压缩。"
+    },
+    {
+      "id": "time-layer-digests",
+      "title": "时间驱动推送与复盘",
+      "domain": "time_layer",
+      "status": "not_implemented",
+      "priority": "p2",
+      "description": "尚未实现日报、周报、主题变化追踪和复习提醒。",
+      "evidence": [
+        "personal_knowledge_os_technical_guidance.md:145"
+      ],
+      "depends_on": [
+        "knowledge-compilation"
+      ],
+      "next_action": "定义时间窗口、触发条件和推送对象。"
+    },
+    {
+      "id": "background-jobs",
+      "title": "后台任务与异步处理",
+      "domain": "infrastructure",
+      "status": "implemented",
+      "priority": "done",
+      "description": "已支持 processing_jobs 表、自动入队、任务列表和进程内任务执行。",
+      "evidence": [
+        "app/models.py:227",
+        "app/repositories.py:539",
+        "app/main.py:189"
+      ],
+      "next_action": "后续可切到独立 worker。"
+    },
+    {
+      "id": "auth-and-access-control",
+      "title": "认证与权限",
+      "domain": "security",
+      "status": "not_implemented",
+      "priority": "p2",
+      "description": "当前没有鉴权、用户隔离或访问控制。",
+      "evidence": [
+        "app/main.py:64"
+      ],
+      "next_action": "明确是否需要多用户，再决定认证方案。"
+    },
+    {
+      "id": "observability",
+      "title": "可观测性增强",
+      "domain": "operations",
+      "status": "not_implemented",
+      "priority": "p2",
+      "description": "除健康检查外，暂无结构化日志、指标和链路跟踪。",
+      "evidence": [
+        "app/main.py:64"
+      ],
+      "next_action": "优先补结构化日志与关键 ingest 指标。"
+    },
+    {
+      "id": "api-and-db-tests",
+      "title": "API 与数据库集成测试",
+      "domain": "quality",
+      "status": "implemented",
+      "priority": "done",
+      "description": "已覆盖真实 PostgreSQL 下的 ingest、jobs/run、全文检索、语义检索，以及 HTTP 级 happy path 端到端链路。",
+      "evidence": [
+        "tests/test_api.py:1",
+        "tests/test_repositories.py:1",
+        "tests/test_integration_postgres.py:1"
+      ],
+      "depends_on": [
+        "collector-test-coverage"
+      ],
+      "next_action": "后续可补 conversation 接口的真实数据库端到端集成测试。"
+    }
+  ]
+}

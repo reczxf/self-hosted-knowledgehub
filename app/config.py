@@ -21,7 +21,13 @@ class Settings(BaseSettings):
         default="postgresql+asyncpg://postgres:postgres@localhost:5432/pkos",
     )
     data_dir: Path = Field(default=Path("./data"))
+    init_db_on_startup: bool = True
+    embedding_dimensions: int = 64
+    deepseek_api_key: str | None = None
+    deepseek_base_url: str = "https://api.deepseek.com"
+    deepseek_model: str = "deepseek-chat"
+    deepseek_timeout_seconds: float = 30.0
+    deepseek_max_tokens: int = 800
 
 
 settings = Settings()
-
